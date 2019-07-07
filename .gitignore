@@ -1,0 +1,6 @@
+// Node related files.
+/node_modules/
+.nvmrc
+
+// Unison file sync file.
+._*
