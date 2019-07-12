@@ -6,8 +6,6 @@ This library provides a set of handy helper functions for running TestCafe tests
 
 There is also a set of baseline tests for your project provided in the `example` directory
 
-An example repository has been set up [here]()
-
 ## Prerequisites
 
 - A Drupal project. **Note:** only Drupal 8 projects are supported.
