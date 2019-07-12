@@ -1,9 +1,8 @@
-import { Selector } from "testcafe";
-
-const config = require("config");
+const { Selector } = require("testcafe");
+const { getBaseUrl } = require("testcafe-drupal");
 
 fixture("Search Tests")
-  .page(config.get("system.domain"))
+  .page(getBaseUrl())
   .beforeEach(async t => {
     await t.maximizeWindow();
   });

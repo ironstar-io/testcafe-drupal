@@ -1,4 +1,4 @@
-import { Selector, ClientFunction } from "testcafe";
+const { Selector } = require("testcafe");
 
 /**
  * Defines Field class.
@@ -46,23 +46,24 @@ class Field {
 
   /**
    * Check <select> contains a given option.
-   * 
+   *
    * @param {string} id
    *   Id property of the <select> element.
    * @param {string} text
-   *   Select element option text to find. This value should be the text that 
+   *   Select element option text to find. This value should be the text that
    *   is visible to the site visitor and is case sensitive.
    */
   async checkSelectFieldHasOption(id, text) {
     const select = Selector("#" + id, { visibilityCheck: false });
-    const optionsCount = select.find('option').withExactText(text).count;
+    const optionsCount = select.find("option").withExactText(text).count;
     await this.t
-      .expect(optionsCount).eql(1, "The option was not found in the select element.");
+      .expect(optionsCount)
+      .eql(1, "The option was not found in the select element.");
   }
 
   /**
    * Choose <select> element option
-   * 
+   *
    * @param {string} id
    *   Id property of the <select> element.
    * @param {string} text
@@ -70,12 +71,10 @@ class Field {
    */
   async chooseSelectFieldOption(id, text) {
     const select = Selector("#" + id, { visibilityCheck: false });
-    const option = select.find('option');
+    const option = select.find("option");
 
-    await this.t
-      .click(select)
-      .click(option.withText(text));
+    await this.t.click(select).click(option.withText(text));
   }
 }
 
-export { Field };
+module.exports = { Field };

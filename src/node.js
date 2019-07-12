@@ -1,5 +1,5 @@
-import { Selector } from "testcafe";
-import { Field } from "./field.js";
+const { Selector } = require("testcafe");
+const { Field } = require("./field");
 
 /**
  * Defines Node class.
@@ -12,31 +12,31 @@ class Node extends Field {
    * Path to the add node form page.
    */
   addNodeBasePath;
-  
+
   /**
    * @var {string} testDomain
    * Domain of target test site.
    */
   config;
-  
+
   /**
    * @var {object} t
    * Testcafe test controller.
    */
   t;
-  
+
   /**
    * @var {string} nodeType
-   * Node type. 
+   * Node type.
    */
   nodeType;
-  
+
   /**
    * @var {string} nodeTitleField
    * Selector for node title field.
    */
   nodeTitleField;
-  
+
   /**
    * @var {string} nodeSavebutton
    * Selector for node form save button.
@@ -56,20 +56,21 @@ class Node extends Field {
   constructor(t, nodeType, testDomain) {
     super(t);
 
-    this.addNodeBasePath = "/node/add";
-    this.testDomain = testDomain;
-    this.nodeTitleField = Selector("#edit-title-0-value");
-    this.nodeSaveButton = Selector("#edit-submit");
     this.t = t;
     this.nodeType = nodeType;
+    this.testDomain = testDomain;
+    this.addNodeBasePath = "/node/add";
+    this.nodeTitleField = Selector("#edit-title-0-value");
+    this.nodeSaveButton = Selector("#edit-submit");
   }
 
   /**
    * Check if currently on view node page.
    */
   async checkOnNodePage() {
-    const nodePageExists = Selector("body.page-node-type-" + this.nodeType.replace(/_/g, "-"))
-      .exists;
+    const nodePageExists = Selector(
+      "body.page-node-type-" + this.nodeType.replace(/_/g, "-")
+    ).exists;
 
     await this.t.expect(nodePageExists).ok();
   }
@@ -86,7 +87,7 @@ class Node extends Field {
   /**
    * Save node.
    *
-   * Clicks save button  on node add/edit form.
+   * Clicks save button on node add/edit form.
    */
   async saveNode() {
     await this.t.click(this.nodeSaveButton);
@@ -136,4 +137,4 @@ class Node extends Field {
   }
 }
 
-export { Node };
+module.exports = { Node };
