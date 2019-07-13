@@ -395,22 +395,6 @@ test("Example test", async t => {
 });
 ```
 
-### getPath
-
-Get the pathname component of the current page's URL (e.g. "/node/12")
-
-Usage:
-
-```js
-const { getPath } = require("testcafe-drupal");
-...
-test("Example test", async t => {
-  const pathName = getPath();
-
-  // Use the pathname in your tests, or pre-test setup
-});
-```
-
 ### getBaseUrl
 
 Return the target test site domain as defined in the configuration (e.g. "http://www.mysite.com").
@@ -438,10 +422,11 @@ Return a user with the administrator role.
 Usage:
 
 ```js
+const { Role } = require("testcafe");
 const { administratorUser } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
-  await t.useRole(administratorUser);
+  await t.useRole(Role(...administratorUser));
 
   // Expectations based on this role
 });
@@ -454,10 +439,11 @@ Return a regular authenticated user.
 Usage:
 
 ```js
+const { Role } = require("testcafe");
 const { authenticatedUser } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
-  await t.useRole(authenticatedUser);
+  await t.useRole(Role(...authenticatedUser));
 
   // Expectations based on this role
 });
@@ -470,10 +456,11 @@ Return an editor user.
 Usage:
 
 ```js
+const { Role } = require("testcafe");
 const { editorUser } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
-  await t.useRole(editorUser);
+  await t.useRole(Role(...editorUser));
 
   // Expectations based on this role
 });

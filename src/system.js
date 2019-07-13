@@ -60,11 +60,8 @@ const getConfig = () => {
   const resolvedConfig = Object.assign({}, defaultConfig, config);
 
   return {
-    system: {
-      domain:
-        process.env.TESTCAFE_DRUPAL_SYSTEM_DOMAIN ||
-        getSafe(() => resolvedConfig.baseUrl)
-    },
+    baseUrl:
+      process.env.TESTCAFE_BASEURL || getSafe(() => resolvedConfig.baseUrl),
     node: {
       create: {
         path:
@@ -131,14 +128,6 @@ const getConfig = () => {
 };
 
 /**
- * Get webpage path.
- *
- * @return {string}
- *   The pathname component of the current page's URL (e.g. "/node/12")
- */
-const getPath = ClientFunction(() => document.location.pathname);
-
-/**
  * Get domain of the test target site.
  *
  * @return {string}
@@ -153,5 +142,5 @@ const getBaseUrl = () => {
 module.exports = {
   getConfig,
   getBaseUrl,
-  getPath
+  getSafe
 };

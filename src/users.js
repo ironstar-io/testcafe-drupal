@@ -3,7 +3,6 @@
  * Defines Testcafe Roles (https://devexpress.github.io/testcafe/documentation/test-api/authentication/user-roles.html).
  */
 
-const { Role } = require("testcafe");
 const { getConfig } = require("./system");
 const { getSafe } = require("./helpers");
 
@@ -25,7 +24,7 @@ const loginButtonSelector = getSafe(
 /**
  * Authenticated user.
  */
-const authenticatedUser = Role(
+const authenticatedUser = [
   loginUrl,
   async t => {
     await t
@@ -40,12 +39,12 @@ const authenticatedUser = Role(
       .click(loginButtonSelector);
   },
   { preserveUrl: true }
-);
+];
 
 /**
  * User with editor role.
  */
-const editorUser = Role(
+const editorUser = [
   loginUrl,
   async t => {
     await t
@@ -60,12 +59,12 @@ const editorUser = Role(
       .click(loginButtonSelector);
   },
   { preserveUrl: true }
-);
+];
 
 /**
  * User with administrator role.
  */
-const administratorUser = Role(
+const administratorUser = [
   loginUrl,
   async t => {
     await t
@@ -80,6 +79,6 @@ const administratorUser = Role(
       .click(loginButtonSelector);
   },
   { preserveUrl: true }
-);
+];
 
 module.exports = { authenticatedUser, administratorUser, editorUser };
