@@ -8,50 +8,27 @@ const { Field } = require("./field");
  */
 class Node extends Field {
   /**
-   * @var {string} addNodeBasePath
-   * Path to the add node form page.
-   */
-  addNodeBasePath;
-
-  /**
-   * @var {string} testDomain
-   * Domain of target test site.
-   */
-  config;
-
-  /**
-   * @var {object} t
-   * Testcafe test controller.
-   */
-  t;
-
-  /**
-   * @var {string} nodeType
-   * Node type.
-   */
-  nodeType;
-
-  /**
-   * @var {string} nodeTitleField
-   * Selector for node title field.
-   */
-  nodeTitleField;
-
-  /**
-   * @var {string} nodeSavebutton
-   * Selector for node form save button.
-   */
-  nodeSaveButton;
-
-  /**
    * Constructor.
    *
    * @param {object} t
-   *   Testcafe test controller.
+   * Testcafe test controller.
    * @param {string} nodeType
-   *   Machine name of the node type.
+   * Machine name of the node type.
    * @param {string} testDomain
-   *   The target domain on which to run tests (e.g. "http://www.example.com").
+   * The target domain on which to run tests (e.g. "http://www.example.com").
+   *
+   * @var {string} addNodeBasePath
+   * Path to the add node form page.
+   * @var {string} testDomain
+   * Domain of target test site.
+   * @var {object} t
+   * Testcafe test controller.
+   * @var {string} nodeType
+   * Node type.
+   * @var {string} nodeTitleField
+   * Selector for node title field.
+   * @var {string} nodeSavebutton
+   * Selector for node form save button.
    */
   constructor(t, nodeType, testDomain) {
     super(t);

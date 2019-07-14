@@ -1,12 +1,10 @@
-const { ClientFunction } = require("testcafe");
+const path = require("path");
 const { getSafe } = require("./helpers");
 
-const config = require(`${process.cwd()}/tests/config`);
+const config = require(path.join(process.cwd(), "/tests/config.js"));
 
 const defaultConfig = {
-  system: {
-    domain: "http://localhost:8080"
-  },
+  baseUrl: "http://localhost:80801",
   node: {
     create: {
       path: "/node/add"
