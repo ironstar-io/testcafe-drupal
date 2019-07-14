@@ -4,7 +4,7 @@
 
 This library provides a set of handy helper functions for running TestCafe tests on your Drupal application
 
-There is also a set of baseline tests for your project provided in the `example` directory
+There is also a set of baseline tests for your project provided in the `example` directory. You can also find an example repo [here](https://github.com/ironstar-io/testcafe-drupal-example).
 
 ## Prerequisites
 
