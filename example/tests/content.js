@@ -1,16 +1,17 @@
-const { Selector } = require("testcafe");
+const { Selector, Role } = require("testcafe");
 const { Node, administratorUser, getBaseUrl } = require("testcafe-drupal");
 
-fixture("Content (node) tests").page(getBaseUrl());
+const baseUrl = getBaseUrl();
+fixture("Content (node) tests").page(baseUrl);
 
 test("Create article content", async t => {
   const nodeType = "article";
-  const node = new Node(t, nodeType, getBaseUrl());
+  const node = new Node(t, nodeType, baseUrl);
   const nodeFormExists = Selector(
     "#node-" + nodeType.replace(/_/g, "-") + "-form"
   ).exists;
 
-  await t.useRole(administratorUser);
+  await t.useRole(Role(...administratorUser));
   await node.goToNodeCreationPage();
   await t.expect(nodeFormExists).ok();
   await node.setTitle("TESTCAFE");
