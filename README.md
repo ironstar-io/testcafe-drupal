@@ -271,7 +271,9 @@ test("Example test", async t => {
 
 ## Node
 
-Provides methods for interacting with Drupal node entities.
+Provides methods for interacting with Drupal node entities. 
+
+Note: The Node class extends the [Field](#field) class so you can access of field methods via Node.
 
 _{class}_
 
