@@ -18,6 +18,59 @@ class Field {
   }
 
   /**
+   * Add file to file upload field.
+   *
+   * @param {string} fileFieldId
+   *   ID property of the file field.
+   * @param {string} file
+   *   Path to the image file to upload. Will use a default JPG image if this
+   *   argument is not provided.
+   */
+  async addFileToField(fileFieldId, file = "") {
+    const filePath = (file === "") ? __dirname + "/assets/drupal_testcafe_image.pdf" : file;
+
+    await this.t.setFilesToUpload("#" + fileFieldId, [filePath]);
+  }
+
+  /**
+   * Add image to file upload field.
+   *
+   * @param {string} fileFieldId
+   *   ID property of the file field.
+   * @param {object} options
+   *   An optional argument which can contain following key-value pairs:
+   *   - "alt": image alt text. Note that if alt text is provided but the image 
+   *     alt text has not been enabled in Drupal, then this function will throw
+   *     an error.
+   *   - "title": image title text. Note that if title text is provided but the 
+   *     image title has not been enabled in Drupal, then this funciton will 
+   *     throw an error. 
+   * @param {string} image
+   *   Path to the image file to upload. Will use a default JPG image if this
+   *   argument is not provided.
+   */
+  async addImageToField(fileFieldId, options = {}, image = "") {
+    const imagefieldWrapper = Selector("#" + fileFieldId)
+    const filePath = (image === "") ? __dirname + "/assets/drupal_testcafe_image.jpg" : image;
+
+    this.addFileToField(fileFieldId, filePath);
+
+    if (options.alt !== undefined) {
+      const imageAltTextFieldId = fileFieldId.replace("-upload", "-alt");
+      const imageAltTextField = Selector("[id^=\"" + imageAltTextFieldId + "\"]");
+
+      this.t.typeText(imageAltTextField, options.alt);
+    }
+
+    if (options.title !== undefined) {
+      const imageTitleTextFieldId = fileFieldId.replace("-upload", "-title");
+      const imageTitleTextField = Selector("[id^=\"" + imageTitleTextFieldId + "\"]");
+
+      this.t.typeText(imageTitleTextField, options.title);
+    }
+  }
+
+  /**
    * Add text for a text based field.
    *
    * Works with <input[type='text']>, <textarea> and CKEditor based text
