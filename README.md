@@ -16,19 +16,26 @@ There is also a set of baseline tests for your project provided in the `example`
 
 ### Preparing Your Tests
 
-- Install this library and dependencies: `npm install --save-dev testcafe-drupal testcafe testcafe-browser-provider-puppeteer` or `yarn add -D ...`
+- Install this library and dependencies: `npm install --save-dev testcafe-drupal` or `yarn add -D ...`
 - Create a directory `tests` in the root of your project
-- Create a file called `config.js` in the `tests` directory (See [Config](##Config) for more information)
-- Set your configuration including base URL and other parameters (Again see [Config](##Config))
-- Optionally copy in the tests from this repository's `example` folder, or write and add your own
+- Create a file called `config.js` in the `tests` directory (See [Config](##config) for more information)
+- Set your configuration including base URL and other parameters (Again see [Config](##config))
+- Optionally copy in the tests from this repository's [example](example) folder, or write and add your own.
 
 ### Preparing Drupal
 
-- Install the Drupal site: `drush si`. Assumes we are using standard install profile.
-- Import site specific configuration: `drush cim`
+- Make sure you have a running Drupal site which is browser accessible.
 - Create an authenticated user: `drush user-create testcafe_user --password="testcafe_user" --mail="testcade_user@localhost"`
 - Create an admin user: `drush user-create testcafe_admin --password="testcafe_admin" --mail="testcade_admin@localhost" && drush user-add-role "administrator" testcafe_admin`
 - Create an editor user: `drush user-create testcafe_editor --password="testcafe_editor" --mail="testcafe_editor@localhost" && drush user-add-role "editor" testcafe_editor`
+
+> The above instructions assume that Drupal user roles `administrator` and `editor` exist on the site. If your site uses different names for the "admin" and "editor" roles, then you should update the roles in the config.js file. 
+>
+> In addition you would need to modify the create user drush commands above.
+>
+> For example, if the maching name of the editor role is `ed`, then the modified Drush command whould be:
+>
+>     drush user-create testcafe_editor --password="testcafe_editor" --mail="testcafe_editor@localhost" && drush user-add-role "ed" testcafe_editor
 
 ## Config
 
@@ -82,9 +89,7 @@ Here is a full list of available configuration and their default values
 };
 ```
 
-## Usage
-
-Drupal TestCafe supports a number of general tests which should be applicable to the majority of Drupal 8 sites. One can also create custom, project specific tests.
+## Running tests
 
 To run all tests on Chrome Headless run the following command from the Drupal TestCafe project directory:
 
