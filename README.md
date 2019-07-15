@@ -273,8 +273,6 @@ test("Example test", async t => {
 
 Provides methods for interacting with Drupal node entities. 
 
-Note: The Node class extends the [Field](#field) class so you can access of field methods via Node.
-
 _{class}_
 
 ```
@@ -297,6 +295,19 @@ test("Example test", async t => {
 
   // Use node methods
 });
+```
+
+The Node class extends the [Field](#field) class so you can access the various field methods via Node the node class.
+
+```js
+test("Example test", async t => {
+  const nodeType = "article";
+  const node = new Node(t, nodeType, baseUrl);
+  await node.addTextToField(
+    "edit-body-0-value",
+    "Here is my test text. What do you think? Something else here as well."
+  );
+}
 ```
 
 ### checkOnNodePage
