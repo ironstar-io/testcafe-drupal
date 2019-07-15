@@ -21,6 +21,8 @@ test("Create article content", async t => {
   );
   await node.chooseSelectFieldOption("edit-body-0-format--2", "Full HTML");
   await node.checkSelectFieldHasOption("edit-body-0-format--2", "Basic HTML");
+  // Upload an image to file field.
+  await node.addImageToField("edit-field-image-0-upload", { alt: "my alt text", title: "my title text" });
   await node.saveNode();
   // await node.checkOnNodePage();
 });
