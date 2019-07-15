@@ -213,7 +213,7 @@ const { Field } = require("testcafe-drupal");
 test("Example test", async t => {
   const field = new Field(t);
 
-  await field.addTextToField("#greeting", "hello")
+  await field.addTextToField("edit-body-0-value", "hello")
 });
 ```
 
@@ -237,7 +237,7 @@ const { Field } = require("testcafe-drupal");
 test("Example test", async t => {
   const field = new Field(t);
 
-  await field.checkSelectFieldHasOption("#country-select", "Australia")
+  await field.checkSelectFieldHasOption("edit-field-options", "Australia")
 });
 ```
 
@@ -260,7 +260,7 @@ const { Field } = require("testcafe-drupal");
 test("Example test", async t => {
   const field = new Field(t);
 
-  await field.chooseSelectFieldOption("#country-select", "Australia")
+  await field.chooseSelectFieldOption("edit-field-options", "Australia")
 });
 ```
 
