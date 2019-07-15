@@ -180,7 +180,10 @@ const { Field } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
   const field = new Field(t);
-  await field.addImageToField("edit-field-image-0-upload", { alt: "my alt text", title: "my title text" });
+  await field.addImageToField(
+    "edit-field-image-0-upload",
+    { alt: "my alt text", title: "my title text" }
+  );
 }); 
 ```
 
