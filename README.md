@@ -130,6 +130,60 @@ test("Example test", async t => {
 });
 ```
 
+#### addFileToField
+
+```
+@param {string} fileFieldId
+  ID property of the file field.
+@param {string} file
+  Path to the image file to upload. Will use a default JPG image if this
+  argument is not provided.
+```
+
+Add file to a Drupal file upload field.
+
+Usage:
+
+```js
+const { Field } = require("testcafe-drupal");
+...
+test("Example test", async t => {
+  const field = new Field(t);
+  await field.addFileToField("edit-field-file-0-upload");
+}); 
+```
+
+#### addImageToField
+
+```
+@param {string} fileFieldId
+  ID property of the file field.
+@param {object} options
+  An optional argument which can contain following key-value pairs:
+  - "alt": image alt text. Note that if alt text is provided but the image 
+    alt text has not been enabled in Drupal, then this function will throw
+    an error.
+  - "title": image title text. Note that if title text is provided but the 
+    image title has not been enabled in Drupal, then this funciton will 
+    throw an error. 
+@param {string} image
+  Path to the image file to upload. Will use a default JPG image if this
+  argument is not provided.
+```
+
+Add Image to a Drupal file upload field. 
+
+Usage:
+
+```js
+const { Field } = require("testcafe-drupal");
+...
+test("Example test", async t => {
+  const field = new Field(t);
+  await field.addImageToField("edit-field-image-0-upload", { alt: "my alt text", title: "my title text" });
+}); 
+```
+
 #### addTextToField
 
 ```
