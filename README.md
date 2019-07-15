@@ -104,6 +104,11 @@ testcafe puppeteer tests/pages.js
 
 // To see the pages tests run in your locally installed chrome browser.
 testcafe chrome tests/pages.js
+
+// To prevent tests from failing due to client side javascript use the `--skip-js-errors` 
+// argument. By default tests will fail if there are client side errors in the javascript.
+testcafe puppeteer tests/pages.js --skip-js-errors
+testcafe chrome tests/pages.js --skip-js-errors
 ```
 
 ## API Reference
