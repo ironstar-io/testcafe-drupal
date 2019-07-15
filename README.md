@@ -18,8 +18,8 @@ There is also a set of baseline tests for your project provided in the `example`
 
 - Install this library and dependencies: `npm install --save-dev testcafe-drupal` or `yarn add -D ...`
 - Create a directory `tests` in the root of your project
-- Create a file called `config.js` in the `tests` directory (See [Config](##config) for more information)
-- Set your configuration including base URL and other parameters (Again see [Config](##config))
+- Create a file called `config.js` in the `tests` directory (See [Config](#config) for more information)
+- Set your configuration including base URL and other parameters (Again see [Config](#config))
 - Optionally copy in the tests from this repository's [example](example) folder, or write and add your own.
 
 ### Preparing Drupal
