@@ -127,7 +127,7 @@ _{class}_
    TestCafe test controller.
 ```
 
-Provides methods for interacting with Drupal fields created using the Field API. Should not be used with Webforms as they use a different API.
+Provides methods for interacting with Drupal fields created using the Field API.
 
 Usage:
 
@@ -146,11 +146,11 @@ test("Example test", async t => {
 @param {string} fileFieldId
   ID property of the file field.
 @param {string} file
-  Path to the image file to upload. Will use a default JPG image if this
+  Path to the image file to upload. Will use a default PDF image if this
   argument is not provided.
 ```
 
-Add file to a Drupal file upload field.
+Add file to a Drupal file upload field. By default it will use a placeholder PDF file.
 
 Usage:
 
@@ -181,7 +181,7 @@ test("Example test", async t => {
   argument is not provided.
 ```
 
-Add Image to a Drupal file upload field. 
+Add Image to a Drupal file upload field. By default it will use a placeholder JPEG file. 
 
 Usage:
 
