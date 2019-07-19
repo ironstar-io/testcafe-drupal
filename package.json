@@ -1,6 +1,6 @@
 {
   "name": "testcafe-drupal",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A set of helper functions and examples for running TestCafe with Drupal",
   "main": "index.js",
   "dependencies": {},
