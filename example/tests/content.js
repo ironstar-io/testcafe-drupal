@@ -1,11 +1,11 @@
 const { Selector, Role } = require("testcafe");
-const { Node, administratorUser, baseUrl } = require("testcafe-drupal");
+const { Node, administratorUser, baseUrl, config } = require("testcafe-drupal");
 
 fixture("Content (node) tests").page(baseUrl);
 
 test("Create article content", async t => {
   const nodeType = "article";
-  const node = new Node(t, nodeType, baseUrl);
+  const node = new Node(t, nodeType, config);
   const nodeFormExists = Selector(
     "#node-" + nodeType.replace(/_/g, "-") + "-form"
   ).exists;

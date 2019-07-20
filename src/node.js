@@ -1,5 +1,6 @@
 const { Selector } = require("testcafe");
 const { Field } = require("./field");
+const { getSafe } = require("./helpers");
 
 /**
  * Defines Node class.
@@ -30,15 +31,18 @@ class Node extends Field {
    * @var {string} nodeSavebutton
    * Selector for node form save button.
    */
-  constructor(t, nodeType, testDomain) {
+  constructor(t, nodeType, config) {
+    const nodeTitleFieldId = getSafe(() => config.node.create.selectors.title);
+    const nodeSaveButtonId = getSafe(() => config.node.create.selectors.save_button);
+
     super(t);
 
     this.t = t;
     this.nodeType = nodeType;
-    this.testDomain = testDomain;
-    this.addNodeBasePath = "/node/add";
-    this.nodeTitleField = Selector("#edit-title-0-value");
-    this.nodeSaveButton = Selector("#edit-submit");
+    this.testDomain = getSafe(() => config.baseUrl);
+    this.addNodeBasePath = getSafe(() => config.node.create.path);
+    this.nodeTitleField = Selector(nodeTitleFieldId);
+    this.nodeSaveButton = Selector(nodeSaveButtonId);
   }
 
   /**
@@ -68,39 +72,6 @@ class Node extends Field {
    */
   async saveNode() {
     await this.t.click(this.nodeSaveButton);
-  }
-
-  /**
-   * Set node base path.
-   *
-   * Overrides the default base path to the add node page.
-   *
-   * @param {string} path
-   *   The base path to add node form. Path should begin with '/' and not
-   *   contain trailing forward slash (e.g. "/node/add")
-   */
-  setNodeBasePath(path) {
-    this.addNodeBasePath = path;
-  }
-
-  /**
-   * Set selector for node title field.
-   *
-   * @param {string} selectorString
-   *   A CSS selector (e.g. ".element-class-name", "#element-id", etc.).
-   */
-  async setNodeTitleField(selectorString) {
-    this.nodeTitleField = Selector(selectorString);
-  }
-
-  /**
-   * Set selector for node save button.
-   *
-   * @param {string} selectorString
-   *   A CSS selector (e.g. ".element-class-name", "#element-id", etc.).
-   */
-  async setNodeSaveButton(selectorString) {
-    this.nodeSaveButton = Selector(selectorString);
   }
 
   /**

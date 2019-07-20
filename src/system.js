@@ -1,13 +1,17 @@
 const path = require("path");
 const { getSafe } = require("./helpers");
 
-const config = require(path.join(process.cwd(), "/tests/config.js"));
+const configuration = require(path.join(process.cwd(), "/tests/config.js"));
 
 const defaultConfig = {
   baseUrl: "http://localhost:80801",
   node: {
     create: {
-      path: "/node/add"
+      path: "/node/add",
+      selectors: {
+        title: "#edit-title-0-value",
+        save_button: "#edit-submit"
+      }
     }
   },
   users: {
@@ -55,7 +59,7 @@ const defaultConfig = {
  *  config files, it's all or none.
  */
 const getConfig = () => {
-  const resolvedConfig = Object.assign({}, defaultConfig, config);
+  const resolvedConfig = Object.assign({}, defaultConfig, configuration);
 
   return {
     baseUrl:
@@ -64,7 +68,15 @@ const getConfig = () => {
       create: {
         path:
           process.env.TESTCAFE_DRUPAL_NODE_CREATE_PATH ||
-          getSafe(() => resolvedConfig.node.create.path)
+          getSafe(() => resolvedConfig.node.create.path),
+        selectors: {
+          title: 
+            process.env.TESTCAFE_DRUPAL_NODE_CREATE_SELECTORS_TITLE ||
+            getSafe(() => resolvedConfig.node.create.selectors.title),
+          save_button: 
+            process.env.TESTCAFE_DRUPAL_NODE_CREATE_SELECTORS_SAVE_BUTTON ||
+            getSafe(() => resolvedConfig.node.create.selectors.save_button)
+        }
       }
     },
     users: {
@@ -126,6 +138,11 @@ const getConfig = () => {
 };
 
 /**
+ * 
+ */
+const config = getConfig();
+
+/**
  * Get domain of the test target site.
  *
  * @return {string}
@@ -140,7 +157,8 @@ const getBaseUrl = () => {
 const baseUrl = getBaseUrl();
 
 module.exports = {
-  getConfig,
+  config,
   baseUrl,
+  getConfig,
   getSafe
 };
