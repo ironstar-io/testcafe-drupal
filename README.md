@@ -54,7 +54,11 @@ Here is a full list of available configuration and their default values
   baseUrl: "http://localhost:8080",
   node: {
     create: {
-      path: "/node/add"
+      path: "/node/add",
+      selectors: {
+        title: "#edit-title-0-value",
+        save_button: "#edit-submit"
+      }
     }
   },
   users: {
