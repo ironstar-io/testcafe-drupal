@@ -137,8 +137,10 @@ const getBaseUrl = () => {
   return baseUrl;
 };
 
+const baseUrl = getBaseUrl();
+
 module.exports = {
   getConfig,
-  getBaseUrl,
+  baseUrl,
   getSafe
 };

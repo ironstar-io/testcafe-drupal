@@ -1,8 +1,8 @@
 const { Selector } = require("testcafe");
-const { getBaseUrl } = require("testcafe-drupal");
+const { baseUrl } = require("testcafe-drupal");
 
 fixture("Search Tests")
-  .page(getBaseUrl())
+  .page(baseUrl)
   .beforeEach(async t => {
     await t.maximizeWindow();
   });

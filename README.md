@@ -290,11 +290,11 @@ _{class}_
 Usage:
 
 ```js
-const { Node, getBaseUrl } = require("testcafe-drupal");
+const { Node, baseUrl } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
   const nodeType = "article";
-  const node = new Node(t, nodeType, getBaseUrl());
+  const node = new Node(t, nodeType, baseUrl);
 
   // Use node methods
 });
@@ -320,11 +320,11 @@ Check if currently on view node page.
 Usage:
 
 ```js
-const { Node, getBaseUrl } = require("testcafe-drupal");
+const { Node, baseUrl } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
   const nodeType = "article";
-  const node = new Node(t, nodeType, getBaseUrl());
+  const node = new Node(t, nodeType, baseUrl);
 
   await node.checkOnNodePage()
 });
@@ -337,11 +337,11 @@ Go to node creation page of given node type.
 Usage:
 
 ```js
-const { Node, getBaseUrl } = require("testcafe-drupal");
+const { Node, baseUrl } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
   const nodeType = "article";
-  const node = new Node(t, nodeType, getBaseUrl());
+  const node = new Node(t, nodeType, baseUrl);
 
   await node.goToNodeCreationPage()
 });
@@ -354,11 +354,11 @@ Save node. Clicks save button on node add/edit form.
 Usage:
 
 ```js
-const { Node, getBaseUrl } = require("testcafe-drupal");
+const { Node, baseUrl } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
   const nodeType = "article";
-  const node = new Node(t, nodeType, getBaseUrl());
+  const node = new Node(t, nodeType, baseUrl);
 
   await node.saveNode()
 });
@@ -377,11 +377,11 @@ Set node base path. Overrides the default base path to the add node pages
 Usage:
 
 ```js
-const { Node, getBaseUrl } = require("testcafe-drupal");
+const { Node, baseUrl } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
   const nodeType = "article";
-  const node = new Node(t, nodeType, getBaseUrl());
+  const node = new Node(t, nodeType, baseUrl);
 
   node.setNodeBasePath("/node/add")
 });
@@ -399,11 +399,11 @@ Set selector for node title field.
 Usage:
 
 ```js
-const { Node, getBaseUrl } = require("testcafe-drupal");
+const { Node, baseUrl } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
   const nodeType = "article";
-  const node = new Node(t, nodeType, getBaseUrl());
+  const node = new Node(t, nodeType, baseUrl);
 
   await node.setNodeTitleField(".some-element")
 });
@@ -421,11 +421,11 @@ Set selector for node save button.
 Usage:
 
 ```js
-const { Node, getBaseUrl } = require("testcafe-drupal");
+const { Node, baseUrl } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
   const nodeType = "article";
-  const node = new Node(t, nodeType, getBaseUrl());
+  const node = new Node(t, nodeType, baseUrl);
 
   await node.setNodeSaveButton(".some-element")
 });
@@ -443,11 +443,11 @@ Set node title text.
 Usage:
 
 ```js
-const { Node, getBaseUrl } = require("testcafe-drupal");
+const { Node, baseUrl } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
   const nodeType = "article";
-  const node = new Node(t, nodeType, getBaseUrl());
+  const node = new Node(t, nodeType, baseUrl);
 
   node.setTitle("This is the title")
 });
@@ -474,23 +474,21 @@ const { getConfig } = require("testcafe-drupal");
 test("Example test", async t => {
   const config = getConfig();
 
-  // Use the config in your tests, or pre-test setup
+  // Use the config in your tests, or pre-test setup.
 });
 ```
 
-### getBaseUrl
+### baseUrl
 
 Return the target test site domain as defined in the configuration (e.g. "http://www.mysite.com").
 
 Usage:
 
 ```js
-const { getBaseUrl } = require("testcafe-drupal");
+const { baseUrl } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
-  const baseUrl = getBaseUrl();
-
-  // Use the base URL in your tests, or pre-test setup
+  // Use the baseUrl variable in your tests, or pre-test setup.
 });
 ```
 

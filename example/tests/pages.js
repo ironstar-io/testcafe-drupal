@@ -1,11 +1,11 @@
 const { RequestLogger } = require("testcafe");
-const { getBaseUrl } = require("testcafe-drupal");
+const { baseUrl } = require("testcafe-drupal");
 
-const logger = RequestLogger(getBaseUrl());
+const logger = RequestLogger(baseUrl);
 
 fixture("Site page accessibility tests");
 
-test.requestHooks(logger).page(getBaseUrl())(
+test.requestHooks(logger).page(baseUrl)(
   "Homepage is accessible",
   async t => {
     // Ensure that the response has been received and that its status code is

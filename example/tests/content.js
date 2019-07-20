@@ -1,7 +1,6 @@
 const { Selector, Role } = require("testcafe");
-const { Node, administratorUser, getBaseUrl } = require("testcafe-drupal");
+const { Node, administratorUser, baseUrl } = require("testcafe-drupal");
 
-const baseUrl = getBaseUrl();
 fixture("Content (node) tests").page(baseUrl);
 
 test("Create article content", async t => {

@@ -2,14 +2,14 @@ const { Role, ClientFunction } = require("testcafe");
 const {
   administratorUser,
   authenticatedUser,
-  getBaseUrl
+  baseUrl
 } = require("testcafe-drupal");
 
 const pathname = ClientFunction(() => document.location.pathname);
 
 const userProfilePagePathPattern = /\/user\/.*$/;
 
-fixture("Login tests").page(getBaseUrl());
+fixture("Login tests").page(baseUrl);
 
 test("Login as authenticated user", async t => {
   await t.useRole(Role(...authenticatedUser));
