@@ -287,18 +287,18 @@ _{class}_
   TestCafe test controller.
 @param {string} nodeType
   Machine name of the node type.
-@param {string} testDomain
-  The target domain on which to run tests (e.g. "http://www.example.com").
+@param {object} config
+  User's specific Drupal Testcafe configuration.
 ```
 
 Usage:
 
 ```js
-const { Node, baseUrl } = require("testcafe-drupal");
+const { Node, config } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
   const nodeType = "article";
-  const node = new Node(t, nodeType, baseUrl);
+  const node = new Node(t, nodeType, config);
 
   // Use node methods
 });
@@ -307,9 +307,11 @@ test("Example test", async t => {
 The Node class extends the [Field](#field) class so you can access the various field methods via Node the node class.
 
 ```js
+const { Node, config } = require("testcafe-drupal");
+...
 test("Example test", async t => {
   const nodeType = "article";
-  const node = new Node(t, nodeType, baseUrl);
+  const node = new Node(t, nodeType, config);
   await node.addTextToField(
     "edit-body-0-value",
     "Here is my test text. What do you think? Something else here as well."
@@ -324,11 +326,11 @@ Check if currently on view node page.
 Usage:
 
 ```js
-const { Node, baseUrl } = require("testcafe-drupal");
+const { Node, config } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
   const nodeType = "article";
-  const node = new Node(t, nodeType, baseUrl);
+  const node = new Node(t, nodeType, config);
 
   await node.checkOnNodePage()
 });
@@ -341,11 +343,11 @@ Go to node creation page of given node type.
 Usage:
 
 ```js
-const { Node, baseUrl } = require("testcafe-drupal");
+const { Node, config } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
   const nodeType = "article";
-  const node = new Node(t, nodeType, baseUrl);
+  const node = new Node(t, nodeType, config);
 
   await node.goToNodeCreationPage()
 });
@@ -358,11 +360,11 @@ Save node. Clicks save button on node add/edit form.
 Usage:
 
 ```js
-const { Node, baseUrl } = require("testcafe-drupal");
+const { Node, config } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
   const nodeType = "article";
-  const node = new Node(t, nodeType, baseUrl);
+  const node = new Node(t, nodeType, config);
 
   await node.saveNode()
 });
@@ -380,11 +382,11 @@ Set node title text.
 Usage:
 
 ```js
-const { Node, baseUrl } = require("testcafe-drupal");
+const { Node, config } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
   const nodeType = "article";
-  const node = new Node(t, nodeType, baseUrl);
+  const node = new Node(t, nodeType, config);
 
   node.setTitle("This is the title")
 });
@@ -392,7 +394,7 @@ test("Example test", async t => {
 
 ## System
 
-### getConfig
+### config
 
 Return an object containing the users' specified Drupal TestCafe configuration
 Order of precedence
@@ -406,12 +408,11 @@ Order of precedence
 Usage:
 
 ```js
-const { getConfig } = require("testcafe-drupal");
+const { Node, config } = require("testcafe-drupal");
 ...
 test("Example test", async t => {
-  const config = getConfig();
-
-  // Use the config in your tests, or pre-test setup.
+  // Use config when initializing an instance of the Node class.
+  const node = new Node(t, nodeType, config);
 });
 ```
 
