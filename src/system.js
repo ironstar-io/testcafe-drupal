@@ -3,8 +3,12 @@ const { getSafe } = require("./helpers");
 
 const configuration = require(path.join(process.cwd(), "/tests/config.js"));
 
+/**
+ * @var {object} defaultConfig
+ *   Default values for Drupal TestCafe configuration.
+ */
 const defaultConfig = {
-  baseUrl: "http://localhost:80801",
+  baseUrl: "http://localhost:8080",
   node: {
     create: {
       path: "/node/add",
@@ -138,7 +142,10 @@ const getConfig = () => {
 };
 
 /**
- * 
+ * @var {object} config
+ *   An object containing the users' Drupal TestCafe configuration. This is the
+ *   final configuration after all environment variable and user specific 
+ *   overrides have been applied. @see getConfig().
  */
 const config = getConfig();
 
@@ -154,6 +161,10 @@ const getBaseUrl = () => {
   return baseUrl;
 };
 
+/**
+ * @var {string} baseUrl
+ *   Base URL of the target test site (e.g. "http://www.testsite.com").
+ */
 const baseUrl = getBaseUrl();
 
 module.exports = {
