@@ -227,12 +227,12 @@ test("Example test", async t => {
 ```
 @param {string} id
   CSS id selector of the <select> element.
-@param {string} text
+@param {array} text
   Select element option text to find. This value should be the text that
   is visible to the site visitor and is case sensitive.
 ```
 
-Check `<select>` contains a given option.
+Check `<select>` contains one or more given options.
 
 Usage:
 
@@ -242,7 +242,10 @@ const { Field } = require("testcafe-drupal");
 test("Example test", async t => {
   const field = new Field(t);
 
-  await field.checkSelectFieldHasOption("edit-field-options", "Australia")
+  await field.checkSelectFieldHasOption(
+    "edit-field-country",
+    ["Australia", "China", "Mali"]
+  )
 });
 ```
 

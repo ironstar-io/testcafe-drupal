@@ -102,16 +102,19 @@ class Field {
    *
    * @param {string} id
    *   Id property of the <select> element.
-   * @param {string} text
+   * @param {array} optionText
    *   Select element option text to find. This value should be the text that
    *   is visible to the site visitor and is case sensitive.
    */
-  async checkSelectFieldHasOption(id, text) {
+  async checkSelectFieldHasOption(id, optionText) {
     const select = Selector("#" + id, { visibilityCheck: false });
-    const optionsCount = select.find("option").withExactText(text).count;
-    await this.t
-      .expect(optionsCount)
-      .eql(1, "The option was not found in the select element.");
+
+    for (let text of optionText) {
+      let optionCount = select.find("option").withExactText(text).count;
+      await this.t
+        .expect(optionCount)
+        .eql(1, "The option \"" + text + "\" was not found in the select element.");
+    }
   }
 
   /**
