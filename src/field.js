@@ -27,7 +27,8 @@ class Field {
    *   argument is not provided.
    */
   async addFileToField(fileFieldId, file = "") {
-    const filePath = (file === "") ? __dirname + "/assets/drupal_testcafe_image.pdf" : file;
+    const filePath =
+      file === "" ? __dirname + "/assets/drupal_testcafe_image.pdf" : file;
 
     await this.t.setFilesToUpload("#" + fileFieldId, [filePath]);
   }
@@ -39,32 +40,43 @@ class Field {
    *   ID property of the file field.
    * @param {object} options
    *   An optional argument which can contain following key-value pairs:
-   *   - "alt": image alt text. Note that if alt text is provided but the image 
+   *   - "alt": image alt text. Note that if alt text is provided but the image
    *     alt text has not been enabled in Drupal, then this function will throw
    *     an error.
-   *   - "title": image title text. Note that if title text is provided but the 
-   *     image title has not been enabled in Drupal, then this funciton will 
-   *     throw an error. 
+   *   - "title": image title text. Note that if title text is provided but the
+   *     image title has not been enabled in Drupal, then this funciton will
+   *     throw an error.
    * @param {string} image
    *   Path to the image file to upload. Will use a default JPG image if this
    *   argument is not provided.
    */
   async addImageToField(fileFieldId, options = {}, image = "") {
-    const imagefieldWrapper = Selector("#" + fileFieldId)
-    const filePath = (image === "") ? __dirname + "/assets/drupal_testcafe_image.jpg" : image;
+    const imagefieldWrapper = Selector("#" + fileFieldId).with({
+      boundTestRun: this.t
+    });
+    const filePath =
+      image === "" ? __dirname + "/assets/drupal_testcafe_image.jpg" : image;
 
     this.addFileToField(fileFieldId, filePath);
 
     if (options.alt !== undefined) {
       const imageAltTextFieldId = fileFieldId.replace("-upload", "-alt");
-      const imageAltTextField = Selector("[id^=\"" + imageAltTextFieldId + "\"]");
+      const imageAltTextField = Selector(
+        '[id^="' + imageAltTextFieldId + '"]'
+      ).with({
+        boundTestRun: this.t
+      });
 
       this.t.typeText(imageAltTextField, options.alt);
     }
 
     if (options.title !== undefined) {
       const imageTitleTextFieldId = fileFieldId.replace("-upload", "-title");
-      const imageTitleTextField = Selector("[id^=\"" + imageTitleTextFieldId + "\"]");
+      const imageTitleTextField = Selector(
+        '[id^="' + imageTitleTextFieldId + '"]'
+      ).with({
+        boundTestRun: this.t
+      });
 
       this.t.typeText(imageTitleTextField, options.title);
     }
@@ -82,7 +94,9 @@ class Field {
    *   Text to be added to field.
    */
   async addTextToField(id, text) {
-    const field = Selector("#" + id, { visibilityCheck: false });
+    const field = Selector("#" + id, { visibilityCheck: false }).with({
+      boundTestRun: this.t
+    });
     if ((await field.exists) && (await field.visible) === false) {
       // Check if uses WYSIWYG.
       const parent = await field.sibling("#cke_" + id);
@@ -107,13 +121,18 @@ class Field {
    *   is visible to the site visitor and is case sensitive.
    */
   async checkSelectFieldHasOption(id, optionText) {
-    const select = Selector("#" + id, { visibilityCheck: false });
+    const select = Selector("#" + id, { visibilityCheck: false }).with({
+      boundTestRun: this.t
+    });
 
     for (let text of optionText) {
       let optionCount = select.find("option").withExactText(text).count;
       await this.t
         .expect(optionCount)
-        .eql(1, "The option \"" + text + "\" was not found in the select element.");
+        .eql(
+          1,
+          'The option "' + text + '" was not found in the select element.'
+        );
     }
   }
 
@@ -126,7 +145,9 @@ class Field {
    *   Select element option text. This value is case sensitve.
    */
   async chooseSelectFieldOption(id, text) {
-    const select = Selector("#" + id, { visibilityCheck: false });
+    const select = Selector("#" + id, { visibilityCheck: false }).with({
+      boundTestRun: this.t
+    });
     const option = select.find("option");
 
     await this.t.click(select).click(option.withText(text));

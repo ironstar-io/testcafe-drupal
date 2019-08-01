@@ -33,7 +33,9 @@ class Node extends Field {
    */
   constructor(t, nodeType, config) {
     const nodeTitleFieldId = getSafe(() => config.node.create.selectors.title);
-    const nodeSaveButtonId = getSafe(() => config.node.create.selectors.save_button);
+    const nodeSaveButtonId = getSafe(
+      () => config.node.create.selectors.save_button
+    );
 
     super(t);
 
@@ -41,8 +43,12 @@ class Node extends Field {
     this.nodeType = nodeType;
     this.testDomain = getSafe(() => config.baseUrl);
     this.addNodeBasePath = getSafe(() => config.node.create.path);
-    this.nodeTitleField = Selector(nodeTitleFieldId);
-    this.nodeSaveButton = Selector(nodeSaveButtonId);
+    this.nodeTitleField = Selector(nodeTitleFieldId).with({
+      boundTestRun: this.t
+    });
+    this.nodeSaveButton = Selector(nodeSaveButtonId).with({
+      boundTestRun: this.t
+    });
   }
 
   /**
@@ -51,7 +57,9 @@ class Node extends Field {
   async checkOnNodePage() {
     const nodePageExists = Selector(
       "body.page-node-type-" + this.nodeType.replace(/_/g, "-")
-    ).exists;
+    ).with({
+      boundTestRun: this.t
+    }).exists;
 
     await this.t.expect(nodePageExists).ok();
   }

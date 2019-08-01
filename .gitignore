@@ -4,3 +4,5 @@
 
 // Unison file sync file.
 ._*
+
+.DS_Store
