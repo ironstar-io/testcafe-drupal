@@ -26,11 +26,23 @@ test("Create article content", async t => {
     "edit-body-0-value",
     "Here is my test text. What do you think? Something else here as well."
   );
-  // Upload an image to file field.
+  // Upload an image to Drupal image field.
   await node.addImageToField(
     "edit-field-image-0-upload",
     { alt: "my alt text", title: "my title text" }
   );
+  // Remove image from Drupal image field.
+  await node.removeImageFromField(
+    "edit-field-image-0-upload"
+  );
+  // Upload an image to Drupal image field.
+  await node.addImageToField(
+    "edit-field-image-0-upload",
+    { alt: "my alt text", title: "my title text" }
+  );
+  // Upload a PDF to Drupal file field.
+  // await node.addFileToField(
+  //   "edit-field-file-0-upload"
+  // );
   await node.saveNode();
-  // await node.checkOnNodePage();
 });
