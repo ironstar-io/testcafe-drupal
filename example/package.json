@@ -1,0 +1,17 @@
+{
+  "name": "tokaido-testcafe",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "tests:headless:all": "testcafe --skip-js-errors puppeteer tests/",
+    "tests:chrome:all": "testcafe --skip-js-errors chrome tests/",
+    "test": "node ./tests/bootstrap.js"
+  },
+  "devDependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.0.19",
+    "testcafe": "^1.3.3",
+    "testcafe-browser-provider-puppeteer": "^1.4.0",
+    "testcafe-drupal": "^0.0.8"
+  }
+}
