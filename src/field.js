@@ -28,7 +28,8 @@ class Field {
    */
   async addFileToField(fileFieldId, file = "") {
     const filePath =
-      file === "" ? __dirname + "/assets/drupal_testcafe_image.pdf" : file;
+      file === "" ? __dirname + "/assets/drupal_testcafe_file.pdf" : file;
+
     await this.t.setFilesToUpload("[id^=\"" + fileFieldId + "\"]", [filePath]);
   }
 
