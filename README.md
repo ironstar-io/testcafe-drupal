@@ -133,6 +133,9 @@ _{class}_
 
 Provides methods for interacting with Drupal fields created using the Field API.
 
+Whilst the Field class can be used directly it should be noted that these methods can be accessed by other classes which extend the Field class. For example, the [Node](#node) class provides useful methods for working with node related tests, whilst also having access to all Field class methods.
+
+
 Usage:
 
 ```js
@@ -276,6 +279,47 @@ test("Example test", async t => {
 });
 ```
 
+#### removeFileFromField
+
+```
+@param {string} id
+  Id property of the Drupal file field.
+```
+
+Remove a file from a Drupal file field.
+
+Usage:
+
+```js
+test("Example test", async t => {
+  const field = new Field(t);
+  await field.removeFileFromField(
+    "edit-field-file-0-upload"
+  );
+});
+```
+
+#### removeImageFromField
+
+```
+@param {string} id
+  Id property of the Drupal file field.
+```
+
+Remove an image file from a Drupal image field.
+
+Usage:
+
+```js
+test("Example test", async t => {
+  const field = new Field(t);
+  await field.removeImageFromField(
+    "edit-field-image-0-upload"
+  );
+});
+```
+
+
 ## Node
 
 Provides methods for interacting with Drupal node entities. 
@@ -304,7 +348,7 @@ test("Example test", async t => {
 });
 ```
 
-The Node class extends the [Field](#field) class so you can access the various field methods via Node the node class.
+The Node class extends the [Field](#field) class so you can access the various field methods directly via the Node class.
 
 ```js
 const { Node, config } = require("testcafe-drupal");

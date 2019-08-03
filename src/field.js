@@ -18,7 +18,7 @@ class Field {
   }
 
   /**
-   * Add file to file upload field.
+   * Add file to Drupal file upload field.
    *
    * @param {string} fileFieldId
    *   ID property of the file field.
@@ -26,15 +26,15 @@ class Field {
    *   Path to the image file to upload. Will use a default JPG image if this
    *   argument is not provided.
    */
-  async addFileToField(fileFieldId, file = "") {
+  async addFileToField(fileFieldId, { file = "" } = {}) {
     const filePath =
-      file === "" ? __dirname + "/assets/drupal_testcafe_image.pdf" : file;
+      file === "" ? __dirname + "/assets/drupal_testcafe_file.pdf" : file;
 
-    await this.t.setFilesToUpload("#" + fileFieldId, [filePath]);
+    await this.t.setFilesToUpload("[id^=\"" + fileFieldId + "\"]", [filePath]);
   }
 
   /**
-   * Add image to file upload field.
+   * Add image to Drupal image upload field.
    *
    * @param {string} fileFieldId
    *   ID property of the file field.
@@ -50,16 +50,14 @@ class Field {
    *   Path to the image file to upload. Will use a default JPG image if this
    *   argument is not provided.
    */
-  async addImageToField(fileFieldId, options = {}, image = "") {
-    const imagefieldWrapper = Selector("#" + fileFieldId).with({
-      boundTestRun: this.t
-    });
+  async addImageToField(fileFieldId, { image = "", alt, title } = {}) {
     const filePath =
       image === "" ? __dirname + "/assets/drupal_testcafe_image.jpg" : image;
 
-    this.addFileToField(fileFieldId, filePath);
+    this.addFileToField(fileFieldId, { file: filePath });
 
-    if (options.alt !== undefined) {
+    // Add image alt text.
+    if (alt !== undefined) {
       const imageAltTextFieldId = fileFieldId.replace("-upload", "-alt");
       const imageAltTextField = Selector(
         '[id^="' + imageAltTextFieldId + '"]'
@@ -67,10 +65,11 @@ class Field {
         boundTestRun: this.t
       });
 
-      this.t.typeText(imageAltTextField, options.alt);
+      this.t.typeText(imageAltTextField, alt);
     }
 
-    if (options.title !== undefined) {
+    // Add image title text.
+    if (title !== undefined) {
       const imageTitleTextFieldId = fileFieldId.replace("-upload", "-title");
       const imageTitleTextField = Selector(
         '[id^="' + imageTitleTextFieldId + '"]'
@@ -78,7 +77,7 @@ class Field {
         boundTestRun: this.t
       });
 
-      this.t.typeText(imageTitleTextField, options.title);
+      this.t.typeText(imageTitleTextField, title);
     }
   }
 
@@ -151,6 +150,30 @@ class Field {
     const option = select.find("option");
 
     await this.t.click(select).click(option.withText(text));
+  }
+
+  /**
+   * Remove file from Drupal file field.
+   * 
+   * @param {string} id
+   *   Id property of the file field.
+   */
+  async removeFileFromField(id) {
+    const removeFileButton = Selector("[id^=\"" + id.replace("-upload", "-remove-button") + "\"]").with({
+      boundTestRun: this.t
+    });
+
+    await this.t.click(removeFileButton);
+  }
+
+  /**
+   * Remove an image from Drupal image field.
+   * 
+   * @param {string} id
+   *   Id property of the file field.
+   */
+  async removeImageFromField(id) {
+    this.removeFileFromField(id);
   }
 }
 
