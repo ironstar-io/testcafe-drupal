@@ -50,11 +50,11 @@ test("Create article content", async t => {
   // Upload images to multivalue Drupal image field.
   await node.addImageToField(
     "edit-field-multi-images-0-upload",
-    { alt: "My alt text" }
+    { alt: "My alt text", title: "My title text" }
   );
   await node.addImageToField(
     "edit-field-multi-images-1-upload",
-    { alt: "My alt text" }
+    { alt: "My alt text", title: "My title text" }
   );
   // Save node.
   await node.saveNode();
