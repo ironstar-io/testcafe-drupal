@@ -1,5 +1,5 @@
 {
-  "name": "tokaido-testcafe",
+  "name": "testcafe-example",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -12,6 +12,6 @@
     "@ffmpeg-installer/ffmpeg": "^1.0.19",
     "testcafe": "^1.3.3",
     "testcafe-browser-provider-puppeteer": "^1.4.0",
-    "testcafe-drupal": "^0.0.8"
+    "testcafe-drupal": "^0.0.10"
   }
 }
