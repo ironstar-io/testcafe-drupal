@@ -26,7 +26,7 @@ class Field {
    *   Path to the image file to upload. Will use a default JPG image if this
    *   argument is not provided.
    */
-  async addFileToField(fileFieldId, file = "") {
+  async addFileToField(fileFieldId, { file = "" } = {}) {
     const filePath =
       file === "" ? __dirname + "/assets/drupal_testcafe_file.pdf" : file;
 
@@ -50,14 +50,14 @@ class Field {
    *   Path to the image file to upload. Will use a default JPG image if this
    *   argument is not provided.
    */
-  async addImageToField(fileFieldId, options = {}, image = "") {
+  async addImageToField(fileFieldId, { image = "", alt, title } = {}) {
     const filePath =
       image === "" ? __dirname + "/assets/drupal_testcafe_image.jpg" : image;
 
-    this.addFileToField(fileFieldId, filePath);
+    this.addFileToField(fileFieldId, { file: filePath });
 
     // Add image alt text.
-    if (options.alt !== undefined) {
+    if (alt !== undefined) {
       const imageAltTextFieldId = fileFieldId.replace("-upload", "-alt");
       const imageAltTextField = Selector(
         '[id^="' + imageAltTextFieldId + '"]'
@@ -65,11 +65,11 @@ class Field {
         boundTestRun: this.t
       });
 
-      this.t.typeText(imageAltTextField, options.alt);
+      this.t.typeText(imageAltTextField, alt);
     }
 
     // Add image title text.
-    if (options.title !== undefined) {
+    if (title !== undefined) {
       const imageTitleTextFieldId = fileFieldId.replace("-upload", "-title");
       const imageTitleTextField = Selector(
         '[id^="' + imageTitleTextFieldId + '"]'
@@ -77,7 +77,7 @@ class Field {
         boundTestRun: this.t
       });
 
-      this.t.typeText(imageTitleTextField, options.title);
+      this.t.typeText(imageTitleTextField, title);
     }
   }
 
