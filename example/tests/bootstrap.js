@@ -1,8 +1,9 @@
 const createTestCafe = require("testcafe");
 
 const runTests = async () => {
+  let testcafe; // Outer scope due to use in `finally` block
   try {
-    const testcafe = await createTestCafe("localhost", 1337, 1338);
+    testcafe = await createTestCafe("localhost", 1337, 1338);
     const runner = testcafe.createRunner();
 
     // const remoteConnection = await testcafe.createBrowserConnection();
@@ -40,7 +41,7 @@ const runTests = async () => {
           output: `${__dirname}/reports/report.xml`
         }
       ])
-      .run();
+      .run({ skipJsErrors: true });
 
     if (failedCount > 0) {
       throw new Error(`${failedCount} tests failed!`);
@@ -51,7 +52,8 @@ const runTests = async () => {
     console.log(ex.message);
     process.exit(1);
   } finally {
-    testcafe.close();
+    await testcafe.close();
+    process.exit(0);
   }
 };
 
