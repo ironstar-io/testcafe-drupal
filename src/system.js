@@ -23,6 +23,15 @@ const getConfig = () => {
   if (typeof process.env.TESTCAFE_BASEURL !== "undefined") {
     resolvedConfig.baseUrl = process.env.TESTCAFE_BASEURL;
   }
+  if (typeof process.env.TESTCAFE_DRUPAL_USERS_ADMIN_PASSWORD !== "undefined") {
+    resolvedConfig.users.admin.password = process.env.TESTCAFE_DRUPAL_USERS_ADMIN_PASSWORD;
+  }
+  if (typeof process.env.TESTCAFE_DRUPAL_USERS_EDITOR_PASSWORD !== "undefined") {
+    resolvedConfig.users.editor.password = process.env.TESTCAFE_DRUPAL_USERS_EDITOR_PASSWORD;
+  }
+  if (typeof process.env.TESTCAFE_DRUPAL_USERS_AUTHUSER_PASSWORD !== "undefined") {
+    resolvedConfig.users.authenticated_user.password = process.env.TESTCAFE_DRUPAL_USERS_AUTHUSER_PASSWORD;
+  }
 
   return resolvedConfig;
 };
