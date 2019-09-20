@@ -65,80 +65,11 @@ const defaultConfig = {
 const getConfig = () => {
   const resolvedConfig = Object.assign({}, defaultConfig, configuration);
 
-  return {
-    baseUrl:
-      process.env.TESTCAFE_BASEURL || getSafe(() => resolvedConfig.baseUrl),
-    node: {
-      create: {
-        path:
-          process.env.TESTCAFE_DRUPAL_NODE_CREATE_PATH ||
-          getSafe(() => resolvedConfig.node.create.path),
-        selectors: {
-          title: 
-            process.env.TESTCAFE_DRUPAL_NODE_CREATE_SELECTORS_TITLE ||
-            getSafe(() => resolvedConfig.node.create.selectors.title),
-          save_button: 
-            process.env.TESTCAFE_DRUPAL_NODE_CREATE_SELECTORS_SAVE_BUTTON ||
-            getSafe(() => resolvedConfig.node.create.selectors.save_button)
-        }
-      }
-    },
-    users: {
-      admin: {
-        username:
-          process.env.TESTCAFE_DRUPAL_USERS_ADMIN_USERNAME ||
-          getSafe(() => resolvedConfig.users.admin.username),
-        password:
-          process.env.TESTCAFE_DRUPAL_USERS_ADMIN_PASSWORD ||
-          getSafe(() => resolvedConfig.users.admin.password),
-        role:
-          process.env.TESTCAFE_DRUPAL_USERS_ADMIN_ROLE ||
-          getSafe(() => resolvedConfig.users.admin.role)
-      },
-      editor: {
-        username:
-          process.env.TESTCAFE_DRUPAL_USERS_EDITOR_USERNAME ||
-          getSafe(() => resolvedConfig.users.editor.username),
-        password:
-          process.env.TESTCAFE_DRUPAL_USERS_EDITOR_PASSWORD ||
-          getSafe(() => resolvedConfig.users.editor.password),
-        role:
-          process.env.TESTCAFE_DRUPAL_USERS_EDITOR_ROLE ||
-          getSafe(() => resolvedConfig.users.editor.role)
-      },
-      authenticated_user: {
-        username:
-          process.env.TESTCAFE_DRUPAL_USERS_AUTHUSER_USERNAME ||
-          getSafe(() => resolvedConfig.users.authenticated_user.username),
-        password:
-          process.env.TESTCAFE_DRUPAL_USERS_AUTHUSER_PASSWORD ||
-          getSafe(() => resolvedConfig.users.authenticated_user.password)
-      }
-    },
-    user: {
-      login: {
-        path:
-          process.env.TESTCAFE_DRUPAL_USER_LOGIN_PATH ||
-          getSafe(() => resolvedConfig.user.login.path),
-        selectors: {
-          username:
-            process.env.TESTCAFE_DRUPAL_USER_LOGIN_SELECTORS_USERNAME ||
-            getSafe(() => resolvedConfig.user.login.selectors.username),
-          password:
-            process.env.TESTCAFE_DRUPAL_USER_LOGIN_SELECTORS_PASSWORD ||
-            getSafe(() => resolvedConfig.user.login.selectors.password),
-          login_button:
-            process.env.TESTCAFE_DRUPAL_USER_LOGIN_SELECTORS_LOGINBUTTON ||
-            getSafe(() => resolvedConfig.user.login.selectors.login_button)
-        }
-      },
-      add: {
-        path:
-          process.env.TESTCAFE_DRUPAL_USER_ADD_PATH ||
-          getSafe(() => resolvedConfig.user.add.path)
-      }
-    }
-  };
+  if (typeof process.env.TESTCAFE_BASEURL !== "undefined") {
+    resolvedConfig.baseUrl = process.env.TESTCAFE_BASEURL;
+  }
+
+  return resolvedConfig;
 };
 
 /**
