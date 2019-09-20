@@ -1,53 +1,8 @@
 const path = require("path");
 const { getSafe } = require("./helpers");
 
+const defaultConfig = require("./config.default.js");
 const configuration = require(path.join(process.cwd(), "/tests/config.js"));
-
-/**
- * @var {object} defaultConfig
- *   Default values for Drupal TestCafe configuration.
- */
-const defaultConfig = {
-  baseUrl: "http://localhost:8080",
-  node: {
-    create: {
-      path: "/node/add",
-      selectors: {
-        title: "#edit-title-0-value",
-        save_button: "#edit-submit"
-      }
-    }
-  },
-  users: {
-    admin: {
-      username: "testcafe_admin",
-      password: "testcafe_admin",
-      role: "administrator"
-    },
-    editor: {
-      username: "testcafe_editor",
-      password: "testcafe_editor",
-      role: "editor"
-    },
-    authenticated_user: {
-      username: "testcafe_user",
-      password: "testcafe_user"
-    }
-  },
-  user: {
-    login: {
-      path: "/user/login",
-      selectors: {
-        username: "#edit-name",
-        password: "#edit-pass",
-        login_button: "form.user-login-form #edit-submit"
-      }
-    },
-    add: {
-      path: "/admin/people/create"
-    }
-  }
-};
 
 /**
  * Get user configuration.
