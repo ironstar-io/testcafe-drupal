@@ -8,7 +8,7 @@ Example tests are provided are provided in the project's `/example` directory.
 
 ## Prerequisites
 
-- A Drupal project. **Note:** only Drupal 8 projects are supported.
+- A Drupal project. **Note:** only Drupal 8 projects are officially supported.
 - Access to the Drush command line tool.
 - Node.js 8.6+
 
@@ -89,13 +89,19 @@ Here is a full list of available configuration and their default values
     add: {
       path: "/admin/people/create"
     }
+  },
+  message: {
+    selectors: {
+      status: ".messages--status",
+      error: ".messages--error"
+    }
   }
 };
 ```
 
 ## Running tests
 
-To run all tests on Chrome Headless run the following command from the Drupal TestCafe project directory:
+To run all tests on Chrome Headless run the following command from the `{PROJECT_ROOT}` directory:
 
 ```
 // Run all tests using Chrome Headless.
@@ -109,15 +115,15 @@ Individual tests, such as checking whether the home page is accessible, can be r
 
 ```
 // Run pages tests on Chrome headless.
-testcafe puppeteer tests/pages.js
+testcafe puppeteer tests/fixtures/pages.js
 
 // To see the pages tests run in your locally installed chrome browser.
-testcafe chrome tests/pages.js
+testcafe chrome tests/fixtures/pages.js
 
-// To prevent tests from failing due to client side javascript use the `--skip-js-errors` 
+// To prevent tests from failing due to client side javascript use the `-e` or `--skip-js-errors` 
 // argument. By default tests will fail if there are client side errors in the javascript.
-testcafe puppeteer tests/pages.js --skip-js-errors
-testcafe chrome tests/pages.js --skip-js-errors
+testcafe -e puppeteer tests/fixtures/pages.js
+testcafe -e chrome tests/fixtures/pages.js --skip-js-errors
 ```
 
 ## API Reference
@@ -433,6 +439,73 @@ test("Example test", async t => {
   const node = new Node(t, nodeType, config);
 
   node.setTitle("This is the title")
+});
+```
+
+## Message
+
+Provides methods for interacting with Drupal generated messages. 
+
+_{class}_
+
+```
+@param {object} t
+  Testcafe test controller.
+@param {object} config
+  Drupal Testcafe configuration.
+```
+
+Usage:
+
+```js
+const { Message, config } = require("testcafe-drupal");
+...
+test("Example test", async t => {
+  const message = new Message(t, config);
+
+  // Use message methods.
+  ...
+});
+```
+
+### statusMessageContainsText
+
+Check if Drupal generated status message contains given text.
+
+```
+@param {string} text
+  Text to search for within message.
+```
+
+Usage:
+
+```js
+const { Message, config } = require("testcafe-drupal");
+...
+test("Example test", async t => {
+  const title = "MY NODE TITLE";
+  const message = new Message(t, config);
+  message.statusMessageContainsText(title + " has been created");
+});
+```
+
+### errorMessageContainsText
+
+Check if Drupal generated error message contains given text.
+
+```
+@param {string} text
+  Text to search for within message.
+```
+
+Usage:
+
+```js
+const { Message, config } = require("testcafe-drupal");
+...
+test("Example test", async t => {
+  const message = new Message(t, config);
+  message.errorMessageContainsText("Oops, you can't do that");
 });
 ```
 

@@ -37,5 +37,11 @@ module.exports = {
     add: {
       path: "/admin/people/create"
     }
+  },
+  message: {
+    selectors: {
+      status: ".messages--status",
+      error: ".messages--error"
+    }
   }
 };
