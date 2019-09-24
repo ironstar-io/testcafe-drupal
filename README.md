@@ -43,7 +43,7 @@ Some configuration is required to be set in order for your tests to work.
 
 Configuration is set in the following order of precedence, and can be composed with a combination:
 
-1. Environment variables
+1. [Environment variables](#environment-variables)
 2. `{PROJECT_ROOT}/tests/config.js`
 3. A set of fallback defaults
 
@@ -516,7 +516,7 @@ test("Example test", async t => {
 Return an object containing the users' specified Drupal TestCafe configuration
 Order of precedence
 
-1. Environment variables
+1. [Environment variables](#environment-variables)
 2. tests/config.js
 3. package.json
    Note that environment variables will overwrite individual properties, however for
@@ -546,6 +546,21 @@ test("Example test", async t => {
   // Use the baseUrl variable in your tests, or pre-test setup.
 });
 ```
+
+### Environment variables
+
+Certain config values can be overridden via the use of environmental variables.
+
+| Variable | Overrides |
+|----------|-------------|
+| process.env.TESTCAFE_BASEURL | config.baseUrl |
+| process.env.TESTCAFE_DRUPAL_USERS_ADMIN_USERNAME | config.users.admin.username |
+| process.env.TESTCAFE_DRUPAL_USERS_ADMIN_PASSWORD | config.users.admin.password |
+| process.env.TESTCAFE_DRUPAL_USERS_EDITOR_USERNAME | config.users.editor.username |
+| process.env.TESTCAFE_DRUPAL_USERS_EDITOR_PASSWORD | config.users.editor.password |
+| process.env.TESTCAFE_DRUPAL_USERS_AUTHUSER_USERNAME | config.users.authenticated_user.username |
+| process.env.TESTCAFE_DRUPAL_USERS_AUTHUSER_PASSWORD | config.users.authenticated_user.password |
+
 
 ## Users
 
