@@ -1,5 +1,5 @@
 module.exports = {
-  baseUrl: "http://localhost:8080",
+  baseUrl: "https://auspost.local.tokaido.io:5154",
   node: {
     create: {
       path: "/node/add",
