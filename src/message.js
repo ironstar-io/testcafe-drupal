@@ -27,8 +27,12 @@ class Message {
   constructor(t, config) {
     this.t = t;
     this.config = config;
-    this.statusMessage = Selector(config.message.selectors.status);
-    this.errorMessage = Selector(config.message.selectors.error);
+    this.statusMessage = Selector(config.message.selectors.status).with({
+      boundTestRun: this.t
+    });
+    this.errorMessage = Selector(config.message.selectors.error).with({
+      boundTestRun: this.t
+    });
   }
 
   /**
