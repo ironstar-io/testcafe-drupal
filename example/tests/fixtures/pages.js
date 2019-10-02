@@ -10,5 +10,5 @@ test.requestHooks(logger).page(baseUrl)("Homepage is accessible", async t => {
   // 200.
   await t
     .expect(logger.contains(record => record.response.statusCode === 200))
-    .ok();
+    .ok("The page request returned a status code of " + logger.requests[0].response.statusCode);
 });
