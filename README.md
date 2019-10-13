@@ -362,6 +362,8 @@ const { Node, config } = require("testcafe-drupal");
 test("Example test", async t => {
   const nodeType = "article";
   const node = new Node(t, nodeType, config);
+
+  await node.goToNodeCreationPage();
   await node.addTextToField(
     "edit-body-0-value",
     "Here is my test text. What do you think? Something else here as well."
@@ -381,7 +383,8 @@ const { Node, config } = require("testcafe-drupal");
 test("Example test", async t => {
   const nodeType = "article";
   const node = new Node(t, nodeType, config);
-
+  
+  await node.goToNodeCreationPage();
   await node.checkOnNodePage()
 });
 ```
@@ -416,6 +419,8 @@ test("Example test", async t => {
   const nodeType = "article";
   const node = new Node(t, nodeType, config);
 
+  await node.goToNodeCreationPage();
+  ...
   await node.saveNode()
 });
 ```
@@ -438,7 +443,9 @@ test("Example test", async t => {
   const nodeType = "article";
   const node = new Node(t, nodeType, config);
 
+  await node.goToNodeCreationPage();
   node.setTitle("This is the title")
+  ...
 });
 ```
 
