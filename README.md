@@ -624,9 +624,9 @@ test("Example test", async t => {
 });
 ```
 
-## Developer Notes
+## Setting up local development environment
 
-Provide instructions for developers on how to setup a local environment for development work on Drupal Testcafe package. It is recommended that you use Yarn due to it's support of Workspaces, which makes life easier when developing NPM packages. The following instructions assume you are using Yarn.
+Provides instructions for developers on how to setup a local environment for development work on Drupal Testcafe package. It is recommended that you use Yarn due to it's support of Workspaces, which makes life easier when developing NPM packages. The following instructions assume you are using Yarn.
 
 1. Create a project directory and add create a `package.json` file with the following content. 
 ```json
