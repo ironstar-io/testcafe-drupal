@@ -624,6 +624,69 @@ test("Example test", async t => {
 });
 ```
 
+## Developer Notes
+
+Provide instructions for developers on how to setup a local environment for development work on Drupal Testcafe package. It is recommended that you use Yarn due to it's support of Workspaces, which makes life easier when developing NPM packages. The following instructions assume you are using Yarn.
+
+1. Create a project directory and add create a `package.json` file with the following content. 
+```json
+{
+  "private": true,
+  "name": "my-project-name",
+  "version": "1.0.0",
+  "workspaces": [
+    "workspace",
+    "packages/*"
+  ]
+}
+```
+
+2. Create the following directory structure in your project:
+
+```
+-- <project root>
+  |-- package.json
+  |-- packages
+  |-- workspace
+```
+
+3. Clone the `testcafe-drupal` project in `packages/` directory.
+```
+cd packages
+git clone git@github.com:ironstar-io/testcafe-drupal.git
+```
+
+4. Change into `workspace/` directory and then set up new yarn project. Add the `testcafe-drupal` package:
+
+```
+cd workspace
+yarn init
+yarn add testcafe-drupal
+yarn install
+```
+
+5. Copy the `tests` directory from the `testcafe-drupal/example` directory into the `workspace` directory. If you are intending to work on the example tests, then you may wish to sybolically link the `tests` directory to the `workspace` directory so that any changes will be automatically applied to the tests directory in the cloned `testcafe-drupal` repository.
+
+6. To run tests go to `workspace/tests` directory and run the appropriate command. For example:
+
+```
+cd workspace/tests
+testcafe -e puppeteer tests/fixtures/pages.js
+```
+
+7. Final project structure should be like this:
+
+```
+-- <project root>
+ |--- package.json
+ |--- packages
+ |  |-- testcafe-drupal
+ |
+ |--- workspace
+    |--package.json
+    |-- tests
+```
+
 ---
 
 Built by the teams at [Technocrat](https://www.technocrat.com.au/) and [Ironstar](https://ironstar.io)
