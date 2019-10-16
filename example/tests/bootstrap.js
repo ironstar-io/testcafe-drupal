@@ -6,3 +6,5 @@ const testRunner = new TestRunner(
   ["chrome"],
   ["tests/fixtures/pages.js", "tests/fixtures/content.js"]
 );
+
+testRunner.runTests();
