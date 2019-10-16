@@ -16,7 +16,7 @@ Example tests are provided are provided in the project's `/example` directory.
 
 ### Preparing Your Tests
 
-- Install this library and dependencies: `npm install --save-dev testcafe-drupal testcafe testcafe-browser-provider-puppeteer` or `yarn add -D ...`
+- Install this library and dependencies: `npm install --save-dev testcafe-drupal testcafe testcafe-browser-provider-puppeteer @ffmpeg-installer/ffmpeg` or `yarn add -D ...`
 - Create a directory `tests` in the root of your project
 - Create a file called `config.js` in the `tests` directory (See [Config](#config) for more information)
 - Set your configuration including base URL and other parameters (Again see [Config](#config))
