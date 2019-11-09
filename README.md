@@ -4,7 +4,7 @@
 
 This library provides a set of handy helper functions for running TestCafe tests on your Drupal application.
 
-Example tests are provided are provided in the project's `/example` directory. 
+Example tests are provided are provided in the project's `/example/tests` directory. 
 
 ## Prerequisites
 
@@ -20,9 +20,25 @@ Example tests are provided are provided in the project's `/example` directory.
 - Create a directory `tests` in the root of your project
 - Create a file called `config.js` in the `tests` directory (See [Config](#config) for more information)
 - Set your configuration including base URL and other parameters (Again see [Config](#config))
-- Optionally copy in the tests from this repository's [example](example) folder, or write and add your own.
 
-### Preparing Drupal
+### Creating tests
+
+- Create a `fixtures` directory within the `tests` directory.
+- Test files should be saved within the `fixtures` directory. For examples of how to write tests see this repository's [example/tests](example) folder. If you like you can copy these tests into your own project and customize them as necessary. For more information on writing test see the Testcafe documentation [site](https://devexpress.github.io/testcafe/documentation/getting-started/).
+
+
+### Preparing Drupal user accounts
+
+If your tests require a user account to be present, then you will need to either configure Drupal Testcafe to use those existing user accounts or create user accounts for the default Drupal Testcafe users.
+
+#### Configure Drupal Testcafe user to use existing user account
+
+Drupal Testcafe support three functional user types (admin, editor and authenticated user). To change the configuration of these functional user types:
+
+- edit `test/config.js` file.
+- For each of the users update the `username`, `password` and `role` values to those of the Drupal user account you wish to use. Note the `role` value should be the machine name of the user role in the Drupal system.
+
+#### Create default Drupal Testcafe users
 
 - Make sure you have a running Drupal site which is browser accessible.
 - Create an authenticated user: `drush user-create testcafe_user --password="testcafe_user" --mail="testcade_user@localhost"`
@@ -36,6 +52,17 @@ Example tests are provided are provided in the project's `/example` directory.
 > For example, if the maching name of the editor role is `ed`, then the modified Drush command whould be:
 >
 >     drush user-create testcafe_editor --password="testcafe_editor" --mail="testcafe_editor@localhost" && drush user-add-role "ed" testcafe_editor
+
+
+### Running tests
+
+To run all tests run the following command from the `{PROJECT_ROOT}` directory:
+
+```
+node ./tests/bootstrap
+```
+
+After the tests have completed you can find information on reported errors (including screenshots and videos) in the `{PROJECT_ROOT}/tests/reports`  directory. 
 
 ## Config
 
@@ -97,33 +124,6 @@ Here is a full list of available configuration and their default values
     }
   }
 };
-```
-
-## Running tests
-
-To run all tests on Chrome Headless run the following command from the `{PROJECT_ROOT}` directory:
-
-```
-// Run all tests using Chrome Headless.
-npm run tests:headless:all
-
-// Run all tests using locally install Chrome browser.
-npm run tests:chrome:all
-```
-
-Individual tests, such as checking whether the home page is accessible, can be run using one of the follow commands:
-
-```
-// Run pages tests on Chrome headless.
-testcafe puppeteer tests/fixtures/pages.js
-
-// To see the pages tests run in your locally installed chrome browser.
-testcafe chrome tests/fixtures/pages.js
-
-// To prevent tests from failing due to client side javascript use the `-e` or `--skip-js-errors` 
-// argument. By default tests will fail if there are client side errors in the javascript.
-testcafe -e puppeteer tests/fixtures/pages.js
-testcafe -e chrome tests/fixtures/pages.js --skip-js-errors
 ```
 
 ## API Reference
@@ -659,9 +659,9 @@ git clone git@github.com:ironstar-io/testcafe-drupal.git
 4. Change into `workspace/` directory and then set up new yarn project. Add the `testcafe-drupal` package:
 
 ```
-cd workspace
+cd ../workspace
 yarn init
-yarn add testcafe-drupal
+yarn add -D testcafe-drupal testcafe testcafe-browser-provider-puppeteer @ffmpeg-installer/ffmpeg
 yarn install
 ```
 
