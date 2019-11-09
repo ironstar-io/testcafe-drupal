@@ -14,9 +14,13 @@ Example tests are provided are provided in the project's `/example/tests` direct
 
 ## Setup
 
-### Preparing Your Tests
+### Installing dependencies
 
+- Create NPM project: `npm init`
 - Install this library and dependencies: `npm install --save-dev testcafe-drupal testcafe testcafe-browser-provider-puppeteer @ffmpeg-installer/ffmpeg` or `yarn add -D ...`
+
+### Preparing your tests environment
+
 - Create a directory `tests` in the root of your project
 - Create a file called `config.js` in the `tests` directory (See [Config](#config) for more information)
 - Set your configuration including base URL and other parameters (Again see [Config](#config))
@@ -59,7 +63,27 @@ Drupal Testcafe support three functional user types (admin, editor and authentic
 To run all tests run the following command from the `{PROJECT_ROOT}` directory:
 
 ```
-node ./tests/bootstrap
+node ./tests
+```
+
+To make life easier you can edit your `{PROJECT_ROOT}/package.json` file to include the following script entry:
+
+
+```json
+{
+  ...
+  "scripts": {
+    ...
+    "tests": "node ./tests/index.js"
+  }
+}
+
+```
+
+You can then run tests by using:
+
+```
+npm run tests
 ```
 
 After the tests have completed you can find information on reported errors (including screenshots and videos) in the `{PROJECT_ROOT}/tests/reports`  directory. 
