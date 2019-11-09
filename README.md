@@ -668,10 +668,10 @@ Provides instructions for developers on how to setup a local environment for dev
 2. Create the following directory structure in your project:
 
 ```
--- <project root>
+-- <project root>/
   |-- package.json
-  |-- packages
-  |-- workspace
+  |-- packages/
+  |-- workspace/
 ```
 
 3. Clone the `testcafe-drupal` project in `packages/` directory.
@@ -694,19 +694,19 @@ yarn install
 6. To run tests go to `workspace/tests` directory and run the appropriate command. For example:
 
 ```
-cd workspace/tests
-testcafe -e puppeteer tests/fixtures/pages.js
+cd workspace
+node ./tests/index.js
 ```
 
 7. Final project structure should be like this:
 
 ```
--- <project root>
+-- <project root>/
  |--- package.json
- |--- packages
+ |--- packages/
  |  |-- testcafe-drupal
  |
- |--- workspace
+ |--- workspace/
     |--package.json
     |-- tests
 ```
