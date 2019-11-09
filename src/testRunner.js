@@ -13,19 +13,20 @@ class TestRunner {
     try {
       testcafe = await createTestCafe("localhost", 1337, 1338);
       const runner = testcafe.createRunner();
-  
+      const callingScriptPath = require('path').dirname(require.main.filename);
+
       console.log("Starting test runner...");
-  
+
       const failedCount = await runner
         .src(this.testSources)
         .browsers(this.browsers)
         .screenshots(
-          `${__dirname}/reports/screenshots/`,
+          `${callingScriptPath}/reports/screenshots/`,
           true,
           "${DATE}_${TIME}/test-${TEST_INDEX}/${USERAGENT}/${FILE_INDEX}.png"
         )
         .video(
-          `${__dirname}/reports/videos/`,
+          `${callingScriptPath}/reports/videos/`,
           {
             singleFile: true,
             failedOnly: true,
@@ -40,15 +41,15 @@ class TestRunner {
           "spec",
           {
             name: "xunit",
-            output: `${__dirname}/reports/report.xml`
+            output: `${callingScriptPath}/reports/report.xml`
           }
         ])
         .run({ skipJsErrors: true });
-  
+
       if (failedCount > 0) {
         throw new Error(`${failedCount} tests failed!`);
       }
-  
+
       console.log("All tests passing!");
     } catch (ex) {
       console.log(ex.message);
@@ -56,7 +57,7 @@ class TestRunner {
     } finally {
       await testcafe.close();
       process.exit(0);
-    }  
+    }
   }
 
 }
