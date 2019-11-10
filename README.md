@@ -29,6 +29,7 @@ Example tests are provided are provided in the project's `/example/tests` direct
 
 - Create a `fixtures` directory within the `tests` directory.
 - Test files should be saved within the `fixtures` directory. For examples of how to write tests see this repository's [example/tests](example) folder. If you like you can copy these tests into your own project and customize them as necessary. For more information on writing test see the Testcafe documentation [site](https://devexpress.github.io/testcafe/documentation/getting-started/).
+- Create a `tests/index.js` file which contains configuration for running tests. Here you can specify the tests to run and which browsers to use. See example [index.js](https://github.com/ironstar-io/testcafe-drupal/blob/master/example/tests/index.js) file for more information.
 
 
 ### Preparing Drupal user accounts
